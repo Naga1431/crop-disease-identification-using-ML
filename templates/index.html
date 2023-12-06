@@ -1,0 +1,183 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Plant Disease Diagnosis</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/test.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/newjs.js') }}" type="text/javascript"></script>
+    <style>
+        
+        body {
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20220523/pngtree-realistic-background-with-green-tea-leaves-flying-in-wind-image_1393280.jpg'); /* Path to your image */
+    background-size:cover; /* Adjust to 'contain' if needed */
+    background-repeat: no-repeat;
+}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        #diagnosis-result p {
+            font-style: italic;
+            color: #c43434;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .custom-file-upload {
+    background-color: #2756d5; /* Change the background color to green */
+    color: #fff; /* Text color */
+    padding: 10px 20px; /* Padding for the button */
+    border: none; /* Remove the default input border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer;
+}
+
+.custom-file-upload:hover {
+    background-color: #0846f0; /* Change the background color on hover */
+}
+#result{
+    color:rgb(10, 10, 10);
+}
+.info-table {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    display:none;
+}
+
+.info-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.info-table b {
+    font-weight: bold;
+}
+
+.info-table p {
+    margin: 0;
+}
+
+    </style>
+</head>
+
+<body>
+<center>
+<br><h1 style="color:red;">Crop Disease Identification</h1><br>
+
+    <form id="upload-file" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg" style="display: none;">
+        <label for="imageUpload" class="btn btn-success custom-file-upload">
+            Choose File
+        </label>
+    </form>
+
+
+    <div class="image-section" style="display:none;">
+         <img id="imagePreview"  class="img-responsive" src="#" style="width:300px;height:300px;"/><br><br>
+         <div>
+            <button type="button" class="btn btn-info btn-lg " id="btn-predict">Predict!</button>
+         </div>
+    </div>
+
+
+
+    <div class="loader" style="display:none;"></div>
+
+    <h3 id="result">
+        <span> </span>
+    </h3>
+    <table class="info-table" id="table">
+        <tr>
+            <td><b>Cause:</b></td>
+            <td><p id="cause"></p></td>
+        </tr>
+        <tr>
+            <td><b>Affects:</b></td>
+            <td><p id="affects"></p></td>
+        </tr>
+        <tr>
+            <td><b>Treat:</b></td>
+            <td><p id="treat"></p></td>
+        </tr>
+        <tr>
+            <td><b>Prevention:</b></td>
+            <td><p id="prevention"></p></td>
+        </tr>
+    </table>
+    
+
+</center><br><br>
+</body>
+
+</html>
